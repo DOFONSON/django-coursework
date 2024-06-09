@@ -12,10 +12,12 @@
                 Фильтры
             </button>
     
-            <form action="{% url "catalog:index" slug_url %}" method="get" class="dropdown-menu bg-dark" data-bs-theme="dark">
+            <form action="{% if request.GET.q %}{% url "catalog:search" %}{% else %}{% url "catalog:index" slug_url %}" {% endif %} method="get" class="dropdown-menu bg-dark" data-bs-theme="dark">
                 <div class="form-check text-white mx-3">
                     <input class="form-check-input" type="checkbox" name="on_sale" id="flexCheckDefault" value="on" {% if request.GET.on_sale == 'on' %}checked{% endif %}>
-                    {% comment %} <input type="hidden" name="q" value="request.GET.q"> {% endcomment %}
+                    {% if request.GET.q %}
+                        <input type="hidden" name="q" value="{{ request.GET.q }}">
+                    {% endif %}
                     <label class="form-check-label" for="flexCheckDefault">
                         Товары по акции
                     </label>
@@ -42,6 +44,14 @@
                 <button type="submit" class="btn btn-primary mx-3 mt-3">Применить</button>
             </form>
         </div>
+        {% if request.GET.q %}
+        <h3 class="mt-4">Результаты поиска по запросу {{request.GET.q}}</h3>
+        {% if not goods %}
+        <link rel="stylesheet" href="{% static "deps/css/my_footer_css.css" %}">
+
+        <h2 class="mt-4">По запросу ничего не найдено</h2>
+        {% endif %}
+        {% endif %}
         {% for product in  goods%}
         <div class="col-lg-4 col-md-6 p-4">
             <div class="card border-primary rounded custom-shadow">
@@ -52,7 +62,7 @@
                 {% endif %}
                 <div class="card-body">
                     <a href="{% url "catalog:product" product.slug %}">
-                        <p class="card-title">{{ product.name }}</p>
+                        <p class="card-title">{% autoescape off %}{% if product_headline %}{{product_headline}}{% else %}{{ product.name }}{% endif %}{% endautoescape %}</p>
                     </a>
                     <p class="card-text">{{ product.description|truncatechars:40 }}</p>
                     <p class="product_id">id: {{product.display_id}}</p>
@@ -75,6 +85,7 @@
         {% endfor %}
         
     </div>
+    {% if goods %}
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center my-4">
             <div class="custom-shadow d-flex">
@@ -100,6 +111,8 @@
             </div>
         </ul>
     </nav>
+    {% endif %}
+    
 {% endblock %}
 
 {% block footer %}
