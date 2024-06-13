@@ -1,5 +1,5 @@
 body {
-  background-image: url("../images/bg-image.jpg");
+  background: #8D5831;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center center;
@@ -35,4 +35,12 @@ body {
   top: 80%;
   border-radius: 15px;
   font-size: 0.7rem;
+}
+
+.header__logo {
+  width: 100px;
+}
+
+.header { 
+  background-color: #8D5831;
 }

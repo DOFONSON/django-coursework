@@ -8,12 +8,18 @@
 <link rel="stylesheet" href="{% static "deps/css/my_footer_css.css" %}">
 {% endblock %}
 {% block content %}
-    <h1 class="mt-5 pt-5"><strong>{{ content }}</strong></h1>
+    <h1 class="mt-5 pt-5 main__title"><strong>{{ content }}</strong></h1>
+    <h2>Добро пожаловать в мир сырков!</h2>
+    <div class="description">
+        Мы рады приветствовать вас в нашем интернет-магазине BJGeDrenouille, 
+        где вы найдете огромный выбор сырков из разных уголков мира. 
+        Наш магазин предлагает только высококачественные продукты, которые будут радовать ваш вкус и насыщать ваш организм полезными веществами.
+    </div>
 {% endblock %}
 {% block footer %}
-<footer class="py-4 bg-dark">
+<footer class="py-4 ">
     <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Home Python Hub Studio 2023</p>
+        <p class="m-0 text-center text-white">Copyright &copy; BJGeDrenouille Nazarov Timophey 2024</p>
     </div>
 </footer>
 {% endblock %}
