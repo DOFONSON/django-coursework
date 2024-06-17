@@ -72,7 +72,7 @@ def profile(request):
         form = ProfileForm(data=request.POST, instance=request.user, files=request.FILES)
         if form.is_valid():
             form.save()
-            messages.success(request, "Профайл успешно обновлен")
+            messages.success(request, "Профиль успешно обновлен")
             return HttpResponseRedirect(reverse('user:profile'))
     else:
         form = ProfileForm(instance=request.user)
@@ -86,7 +86,7 @@ def profile(request):
         
 
     context = {
-        'title': 'Home - Кабинет',
+        'title': 'BJGeDrenouille - Кабинет',
         'form': form,
         'orders': orders,
     }
